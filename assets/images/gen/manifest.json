@@ -1,0 +1,212 @@
+{
+ "strips": {
+  "cetus_idle": {
+   "n": 4,
+   "h": 251
+  },
+  "cetus_bite": {
+   "n": 4,
+   "h": 251
+  },
+  "cetus_stun": {
+   "n": 2,
+   "h": 251
+  },
+  "cetus_roar": {
+   "n": 2,
+   "h": 251
+  },
+  "ladon_idle": {
+   "n": 4,
+   "h": 121
+  },
+  "ladon_strike": {
+   "n": 4,
+   "h": 121
+  },
+  "ladon_fire": {
+   "n": 4,
+   "h": 121
+  },
+  "ladon_stun": {
+   "n": 2,
+   "h": 121
+  },
+  "ladon_die": {
+   "n": 2,
+   "h": 121
+  },
+  "an_chain": {
+   "n": 4,
+   "h": 38
+  },
+  "an_free": {
+   "n": 4,
+   "h": 38
+  },
+  "an_run": {
+   "n": 6,
+   "h": 38
+  },
+  "an_crown": {
+   "n": 5,
+   "h": 38
+  },
+  "cel_fly": {
+   "n": 6,
+   "h": 67
+  },
+  "cel_throw": {
+   "n": 4,
+   "h": 67
+  },
+  "cel_screech": {
+   "n": 1,
+   "h": 67
+  },
+  "cel_dive": {
+   "n": 2,
+   "h": 67
+  },
+  "cel_land": {
+   "n": 2,
+   "h": 67
+  },
+  "cel_die": {
+   "n": 4,
+   "h": 67
+  },
+  "sn_slither": {
+   "n": 4,
+   "h": 38
+  },
+  "sn_spit": {
+   "n": 4,
+   "h": 38
+  },
+  "sn_glob": {
+   "n": 1,
+   "h": 7
+  },
+  "sn_bite": {
+   "n": 4,
+   "h": 38
+  },
+  "sn_die": {
+   "n": 4,
+   "h": 38
+  },
+  "si_fly": {
+   "n": 6,
+   "h": 36
+  },
+  "si_sing": {
+   "n": 4,
+   "h": 36
+  },
+  "si_dive": {
+   "n": 2,
+   "h": 36
+  },
+  "si_die": {
+   "n": 4,
+   "h": 36
+  },
+  "pr_amph_t": {
+   "n": 4,
+   "h": 15
+  },
+  "pr_amph_p": {
+   "n": 4,
+   "h": 15
+  },
+  "pr_amph_g": {
+   "n": 4,
+   "h": 15
+  },
+  "pr_chest": {
+   "n": 2,
+   "h": 16
+  },
+  "pr_gem": {
+   "n": 1,
+   "h": 8
+  },
+  "pr_coin": {
+   "n": 6,
+   "h": 9
+  },
+  "pr_urn": {
+   "n": 1,
+   "h": 15
+  },
+  "pr_stele": {
+   "n": 1,
+   "h": 16
+  },
+  "pr_brazier": {
+   "n": 6,
+   "h": 25
+  },
+  "pr_gate": {
+   "n": 2,
+   "h": 45
+  },
+  "pr_statue": {
+   "n": 1,
+   "h": 34
+  },
+  "pr_rubble": {
+   "n": 1,
+   "h": 13
+  },
+  "hud_heart": {
+   "n": 3,
+   "h": 10
+  },
+  "hud_coin": {
+   "n": 1,
+   "h": 10
+  },
+  "hud_nectar": {
+   "n": 1,
+   "h": 12
+  },
+  "hud_draught": {
+   "n": 1,
+   "h": 12
+  },
+  "hud_face": {
+   "n": 1,
+   "h": 16
+  },
+  "hud_slot": {
+   "n": 1,
+   "h": 18
+  },
+  "hud_eye": {
+   "n": 1,
+   "h": 12
+  },
+  "hud_helm": {
+   "n": 1,
+   "h": 13
+  },
+  "hud_sandal": {
+   "n": 1,
+   "h": 12
+  },
+  "hud_harpe": {
+   "n": 1,
+   "h": 13
+  },
+  "hud_shield": {
+   "n": 1,
+   "h": 13
+  },
+  "title_logo": {
+   "n": 1,
+   "h": 116
+  }
+ }
+}

@@ -1,0 +1,30 @@
+{
+  "cell": 102,
+  "drawSize": 52,
+  "anims": {
+    "idle": 4,
+    "run": 7,
+    "jump": 7,
+    "flip": 4,
+    "hurt": 2,
+    "death": 4,
+    "slash": 4,
+    "slash_up": 4,
+    "slash_air": 3,
+    "harpe": 4,
+    "harpe_up": 4,
+    "pogo": 2,
+    "pogo_bounce": 2,
+    "shield": 4,
+    "glide": 3,
+    "wing_jump": 3,
+    "nectar": 4,
+    "gaze": 4,
+    "idle_harpe": 4,
+    "run_harpe": 7,
+    "jump_harpe": 7,
+    "hurt_harpe": 2,
+    "flip_harpe": 4,
+    "death_harpe": 4
+  }
+}

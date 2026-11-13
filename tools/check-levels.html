@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Stage Checker</title>
+<style>
+  body { background: #111; color: #ddd; font: 13px/1.5 monospace; margin: 16px; }
+  .pass { color: #7fe08a; } .fail { color: #ff7a6a; }
+</style>
+</head>
+<body>
+<h3>Perseus Ascendant: stage completability check</h3>
+<p>Plays each stage with scripted inputs (no enemies) and reports whether the boss gate is reachable without damage.
+Add <code>?w=3</code> to check a single world.</p>
+<pre id="out"></pre>
+<script type="module">
+  import { runChecks } from './check-levels.js';
+  const out = document.getElementById('out');
+  const log = (s) => {
+    const cls = s.includes('PASS') ? 'pass' : s.includes('FAIL') ? 'fail' : '';
+    out.insertAdjacentHTML('beforeend', `<span class="${cls}">${s}</span>\n`);
+  };
+  const w = new URLSearchParams(location.search).get('w');
+  window.checkResults = runChecks(w ? [Number(w)] : undefined, log);
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Backups and downloads (too large for GitHub)
+*.zip
+5484973001296020519/
+
+# Source art: the game uses the processed copies in assets/
+JPGs/
+PNGs/
+assets2/
+/Gemini_Generated_Image_*.jpg
+
+# First attempt (React), kept locally only
+App.tsx
+index.tsx
+tv.tsx
+utils.ts
+utils/
+SpriteRenderer.ts
+constants.ts
+tsconfig.json
+agent_injected.d.ts
+playground_config.json
+THIRD_PARTY_NOTICES.md
+design/
+
+# Local tooling
+.claude/
+node_modules/
+Thumbs.db
+desktop.ini
