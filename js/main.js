@@ -1,7 +1,7 @@
 // Boot, main loop and screens (title, story, world cards, pause, relic reveal, game over, ending).
 import { loadAssets, drawSprite, getBackground, sprites, images } from './assets.js';
-import { unlockAudio, playMusic, sfx, toggleMute, audioState, WORLD_TRACKS } from './audio.js';
-import { input, updateInput, setupTouch, consumeAll } from './input.js';
+import { unlockAudio, playMusic, sfx, toggleMute, audioState, WORLD_TRACKS, setHidden } from './audio.js';
+import { input, updateInput, setupTouch, consumeAll, setTouchButtons } from './input.js';
 import { WORLDS, RELICS, RELIC_ORDER } from './levels.js';
 import * as G from './game.js';
 
@@ -35,6 +35,21 @@ function resize() {
 }
 window.addEventListener('resize', resize);
 resize();
+
+// Switching tabs or apps pauses the game and silences the music.
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && state === 'play') { setState('pause'); }
+  setHidden(document.hidden);
+});
+window.addEventListener('blur', () => { if (state === 'play') setState('pause'); });
+
+const BASE_BUTTONS = ['left', 'right', 'up', 'down', 'jump', 'attack', 'pause'];
+const RELIC_BUTTONS = { shield: 'shield', kibisis: 'nectar', helm: 'helm', head: 'gaze' };
+function updateTouchButtons() {
+  const vis = new Set(BASE_BUTTONS);
+  if (state === 'play') for (const r in RELIC_BUTTONS) if (run.relics.has(r)) vis.add(RELIC_BUTTONS[r]);
+  setTouchButtons(vis);
+}
 
 function setState(s) { state = s; stateT = 0; menuIdx = 0; consumeAll(); }
 function fadeTo(cb) { if (fadeCb) return; fadeDir = 1; fadeCb = cb; }
@@ -100,7 +115,7 @@ function update(dt) {
       if (input.pressed.confirm && stateT > 0.4) { sfx('confirm'); fadeTo(() => setState('worldcard')); }
       break;
     case 'worldcard':
-      if ((input.pressed.confirm && stateT > 0.5) || stateT > 5) { sfx('confirm'); fadeTo(() => startWorld(run.world)); }
+      if ((input.pressed.confirm && stateT > 0.5) || stateT > 12) { sfx('confirm'); fadeTo(() => startWorld(run.world)); }
       break;
     case 'play':
       if (input.pressed.pause) { sfx('pause'); setState('pause'); break; }
@@ -147,6 +162,8 @@ function update(dt) {
       if (stateT > 2.5) fadeTo(() => { playMusic('ending'); setState('ending'); });
       break;
     case 'ending':
+      // Confirm skips ahead to THE END card; once it shows, confirm returns to the title.
+      if (input.pressed.confirm && stateT > 1 && stateT < 15) { stateT = 15; break; }
       if (input.pressed.confirm && stateT > 16) {
         sfx('confirm');
         try { localStorage.removeItem('perseus_save'); } catch (e) { /* ignore */ }
@@ -408,6 +425,7 @@ function drawLoading() {
 
 function draw() {
   ctx.imageSmoothingEnabled = false;
+  updateTouchButtons();
   switch (state) {
     case 'loading': drawLoading(); break;
     case 'title': drawTitle(); break;

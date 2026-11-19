@@ -13,27 +13,32 @@
   #touch { position: fixed; inset: 0; pointer-events: none; display: none; }
   #touch.on { display: block; }
   .tb { position: absolute; pointer-events: auto; width: 64px; height: 64px; border-radius: 50%;
-        background: rgba(255, 220, 140, .16); border: 2px solid rgba(255, 220, 140, .45); color: #ffe6a8;
+        background: rgba(255, 220, 140, .10); border: 2px solid rgba(255, 220, 140, .35); color: rgba(255, 230, 168, .8);
         font: 11px 'Press Start 2P', monospace; display: flex; align-items: center; justify-content: center;
         user-select: none; -webkit-user-select: none; }
   .tb.on { background: rgba(255, 220, 140, .4); }
   .tb.sm { width: 44px; height: 44px; font-size: 8px; }
+  /* Short landscape screens: smaller buttons kept low, in the ground band below the action. */
+  @media (orientation: landscape) and (max-height: 500px) {
+    .tb { width: 54px; height: 54px; font-size: 9px; }
+    .tb.sm { width: 40px; height: 40px; font-size: 7px; }
+  }
 </style>
 </head>
 <body>
 <canvas id="game" width="480" height="270"></canvas>
 <div id="touch">
-  <div class="tb" data-a="left"  style="left:18px;bottom:70px">&#9664;</div>
-  <div class="tb" data-a="right" style="left:118px;bottom:70px">&#9654;</div>
-  <div class="tb sm" data-a="up"   style="left:78px;bottom:136px">&#9650;</div>
-  <div class="tb sm" data-a="down" style="left:78px;bottom:14px">&#9660;</div>
-  <div class="tb" data-a="jump"   style="right:18px;bottom:40px">JUMP</div>
-  <div class="tb" data-a="attack" style="right:96px;bottom:20px">ATK</div>
-  <div class="tb sm" data-a="shield" style="right:100px;bottom:96px">SHLD</div>
-  <div class="tb sm" data-a="helm"   style="right:40px;bottom:120px">HELM</div>
-  <div class="tb sm" data-a="gaze"   style="right:156px;bottom:76px">GAZE</div>
-  <div class="tb sm" data-a="nectar" style="right:156px;bottom:20px">HEAL</div>
-  <div class="tb sm" data-a="pause"  style="right:18px;top:14px">II</div>
+  <div class="tb" data-a="left"  style="left:10px;bottom:10px">&#9664;</div>
+  <div class="tb" data-a="right" style="left:120px;bottom:10px">&#9654;</div>
+  <div class="tb sm" data-a="down" style="left:70px;bottom:6px">&#9660;</div>
+  <div class="tb sm" data-a="up"   style="left:70px;bottom:56px">&#9650;</div>
+  <div class="tb" data-a="jump"   style="right:10px;bottom:10px">JUMP</div>
+  <div class="tb" data-a="attack" style="right:76px;bottom:10px">ATK</div>
+  <div class="tb sm" data-a="shield" style="right:142px;bottom:6px">SHLD</div>
+  <div class="tb sm" data-a="nectar" style="right:142px;bottom:52px">HEAL</div>
+  <div class="tb sm" data-a="helm"   style="right:16px;bottom:72px">HELM</div>
+  <div class="tb sm" data-a="gaze"   style="right:82px;bottom:72px">GAZE</div>
+  <div class="tb sm" data-a="pause"  style="right:10px;top:10px">II</div>
 </div>
 <script type="module" src="js/main.js"></script>
 </body>

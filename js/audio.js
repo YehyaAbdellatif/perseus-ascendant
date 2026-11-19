@@ -5,11 +5,11 @@ const TRACKS = {
   stage: 'assets/audio/bgm_mythic_journey.mp3',
   boss: 'assets/audio/bgm_boss_clash.mp3',
   // CC0 tracks by Juhani Junkala (see CREDITS.md)
-  title: 'assets/audio/music_title.wav',
-  level1: 'assets/audio/music_level1.wav',
-  level2: 'assets/audio/music_level2.wav',
-  level3: 'assets/audio/music_level3.wav',
-  ending: 'assets/audio/music_ending.wav',
+  title: 'assets/audio/music_title.mp3',
+  level1: 'assets/audio/music_level1.mp3',
+  level2: 'assets/audio/music_level2.mp3',
+  level3: 'assets/audio/music_level3.mp3',
+  ending: 'assets/audio/music_ending.mp3',
 };
 
 // Stage music per world (boss fights always use the boss track).
@@ -81,6 +81,14 @@ export function playMusic(name) {
   current.currentTime = 0;
   const p = current.play();
   if (p && p.catch) p.catch(() => {});
+}
+
+// Silence everything while the tab is hidden; pick the track back up when it returns.
+export function setHidden(hidden) {
+  if (ac) { if (hidden) ac.suspend(); else ac.resume(); }
+  if (!current) return;
+  if (hidden) current.pause();
+  else { const p = current.play(); if (p && p.catch) p.catch(() => {}); }
 }
 
 export function toggleMute() {

@@ -42,6 +42,10 @@ let enemies = [], projectiles = [], particles = [], pickups = [], props = [], pl
 let boss = null;
 let fxList = [];
 let hitstop = 0;
+// Button presses made during a hit-stop freeze are kept here and acted on when play resumes.
+const LATCH = ['jump', 'attack', 'helm', 'gaze', 'nectar'];
+const latched = {};
+function pressed(a) { return input.pressed[a] || !!latched[a]; }
 let events = [];          // messages for main.js (death, gate, relic, victory)
 let flash = 0, lightning = 0, lightningTimer = 6, rain = [];
 let signText = null, signAlpha = 0;
@@ -405,7 +409,7 @@ function updatePlayer(dt) {
   }
 
   // Jumping
-  if (I.pressed.jump) p.jumpBuf = JUMP_BUFFER;
+  if (pressed('jump')) p.jumpBuf = JUMP_BUFFER;
   if (p.onGround) { p.coyote = COYOTE; p.airJumps = has('sandals') ? 1 : 0; }
   else p.coyote -= dt;
 
@@ -436,7 +440,7 @@ function updatePlayer(dt) {
 
   // Attack
   p.attackT -= dt;
-  if (I.pressed.attack && p.attackCD <= 0 && p.hurtT <= 0) {
+  if (pressed('attack') && p.attackCD <= 0 && p.hurtT <= 0) {
     p.attackT = ATTACK_TIME; p.attackCD = 0.3; p.attackUp = I.held.up; p.hitSet = new Set();
     sfx('slash');
     if (p.invisible) setInvisible(false);
@@ -457,7 +461,7 @@ function updatePlayer(dt) {
   }
 
   // Relic powers
-  if (I.pressed.helm && has('helm')) setInvisible(!p.invisible);
+  if (pressed('helm') && has('helm')) setInvisible(!p.invisible);
   if (p.invisible) {
     run.helm -= 22 * dt;
     if (run.helm <= 0) { run.helm = 0; setInvisible(false); }
@@ -466,11 +470,11 @@ function updatePlayer(dt) {
     p.helmDelay -= dt;
     if (p.helmDelay <= 0) run.helm = Math.min(100, run.helm + 12 * dt);
   }
-  if (I.pressed.gaze && has('head')) {
+  if (pressed('gaze') && has('head')) {
     if (run.charges > 0 && p.gazeCD <= 0) useGaze();
     else if (run.charges <= 0) { floatText(p.x + 6, p.y - 8, 'NO POWER', '#8aa'); sfx('clank'); }
   }
-  if (I.pressed.nectar && has('kibisis')) {
+  if (pressed('nectar') && has('kibisis')) {
     if (run.nectar > 0 && p.hp < MAX_HP) {
       run.nectar--; p.hp = Math.min(MAX_HP, p.hp + 3); p.drinkT = 0.6;
       sfx('heal'); floatText(p.x + 6, p.y - 6, '+3', '#ff8ab0'); spawnFx('heal', p.x + 6, p.y + p.h);
@@ -1075,9 +1079,13 @@ export function update(dt) {
   if (!L) return;
   run.time += dt;
   L.t += dt;
-  if (hitstop > 0) { hitstop -= dt; updateParticles(dt * 0.3); return; }
+  if (hitstop > 0) {
+    for (const a of LATCH) if (input.pressed[a]) latched[a] = true;
+    hitstop -= dt; updateParticles(dt * 0.3); return;
+  }
   updateWorldObjects(dt);
   updatePlayer(dt);
+  for (const a of LATCH) latched[a] = false;
   updateCrumble(dt);
   for (const e of enemies) if (e.alive) updateEnemy(e, dt);
   if (boss) {

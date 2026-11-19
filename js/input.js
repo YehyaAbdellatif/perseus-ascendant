@@ -35,6 +35,16 @@ window.addEventListener('keyup', (e) => keyDown.delete(e.code));
 window.addEventListener('blur', () => { keyDown.clear(); touchDown.clear(); });
 
 // Touch buttons
+// Show only the touch buttons that do something right now (relic buttons appear once the relic is won).
+export function setTouchButtons(visible) {
+  const wrap = document.getElementById('touch');
+  if (!wrap || !input.usingTouch) return;
+  const key = [...visible].sort().join();
+  if (wrap.dataset.shown === key) return;
+  wrap.dataset.shown = key;
+  for (const el of wrap.querySelectorAll('.tb')) el.style.display = visible.has(el.dataset.a) ? '' : 'none';
+}
+
 export function setupTouch() {
   const wrap = document.getElementById('touch');
   if (!wrap) return;
